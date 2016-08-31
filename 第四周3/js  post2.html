@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<!--上传数据的content-type-->
+		<form action="http://www.marrymin.com:8180/Ajax/Post" method="post" enctype="application/x-www-form-urlencoded">
+			
+			<input type="text" name="username" id="username" value="" />
+			<input type="password" name="password" id="password" value="" />
+			<input type="submit" value="提交"/>
+		</form>
+		
+		
+		
+		<script type="text/javascript">
+			
+			var xhr=new XMLHttpRequest();
+			
+			xhr.onreadystatechange=function  () {
+				if (xhr.readyState==4) {
+					alert(xhr.responseText);
+				}
+			}
+			
+			xhr.open("POST","http://www.marrymin.com:8180/Ajax/Post");
+			
+			//创建参数
+			var formdate=new FormData();
+			//添加参数  append（key ，value）
+			formdate.append("username","111");
+			formdate.append("password","222");
+			
+			
+			
+			xhr.send(formdate);
+			
+		</script>
+		
+	</body>
+</html>
