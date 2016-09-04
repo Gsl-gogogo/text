@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			var oDate=new Date();
+			setInterval(function  () {
+				document.write("<h1>"+oDate.getFullYear()+"年"+(oDate.getMonth()+1)+"月"+oDate.getDate()+"日"+" "+"星期"+
+			"日一二三四五六".charAt(oDate.getDay())+" "+oDate.getHours()+":"+oDate.getMinutes()+":"+oDate.getSeconds()
+			+"</h1>")
+			},1000);
+			
+			
+			
+		</script>
+		
+	</body>
+</html>
