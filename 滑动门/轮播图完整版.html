@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .out_div{
+            width: 800px;
+            height: 500px;
+            position: relative;
+            margin: 50px auto;
+            border: thick solid olivedrab;
+            overflow: hidden;
+        }
+        ul{
+            position: absolute;
+            left: -800px;
+            width: 4000px;
+            height: 500px;
+
+        }
+        li{
+            list-style-type: none;
+            float:left ;
+        }
+        img{
+            width: 800px;
+            height: 500px;
+        }
+        button{
+            position: absolute;
+            top: 225px;
+            width: 24px;
+            height: 48px;
+            background-image: url(img/arrow.jpg);
+        }
+        .first_bt{
+
+        }
+        .second_bt{
+            right: 0px;
+            background-position:0px -48px;
+        }
+        .span_div{
+            position: absolute;
+            bottom: 0;
+            left: 350px;
+            width: 100px;
+            height: 30px;
+            /*background: red;*/
+        }
+        span{
+            display: inline-block;
+            margin: 5px 4px;
+            width: 20px;
+            height: 20px;
+            border-radius:50% ;
+            background-color: white;
+        }
+        .span_div>span:first-child{
+            background-color: red;
+        }
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+	<div class="out_div">
+	    <ul>
+	        <li><a href=""><img src="img/3.jpg"/></a></li>
+	        <li><a href=""><img src="img/1.jpg"/></a></li>
+	        <li><a href=""><img src="img/2.jpg"/></a></li>
+	        <li><a href=""><img src="img/3.jpg"/></a></li>
+	        <li><a href=""><img src="img/1.jpg"/></a></li>
+	    </ul>
+	
+	    <button class="first_bt"></button>
+	    <button class="second_bt"></button>
+	
+	    <div class="span_div">
+	        <span></span>
+	        <span></span>
+	        <span></span>
+	    </div>	
+	</div>
+	
+	<script type="text/javascript">
+		
+		var glableTimer=null;
+		var timer=null;
+		
+		var ul=document.querySelector("ul");
+		var div=document.querySelector(".out_div");
+		
+		var isMoving=false;
+		var targetL=0;
+		
+		function slideAction (targetLeft) {
+			clearInterval(timer);
+			
+			timer=setInterval(function  () {
+				
+				var distance=(targetLeft-ul.offsetLeft)/7;
+				var targetDis=distance>0?Math.ceil(distance):Math.floor(distance);
+				
+				if (ul.offsetLeft==targetLeft) {
+					
+					if (ul.offsetLeft<=-3200) {
+						ul.style.left="-800px";
+					}
+					if (ul.offsetLeft>=0) {
+						ul.style.left="-2400px";
+					}
+					
+					clearInterval(timer);
+					isMoving=false;
+					
+					 setSpanDotColor(ul.offsetLeft);
+				} else{
+					ul.style.left=ul.offsetLeft+targetDis+"px";
+					isMoving=true;
+					
+				}
+					
+				
+			},50)
+						
+		}
+		
+		clearInterval(glableTimer);
+		
+		function autoSlide () {
+			
+			glableTimer=setInterval(function  () {
+				
+				if (!isMoving) {
+					targetL=ul.offsetLeft;
+					
+				}
+				slideAction(targetL-800);
+				
+			},3000);
+			
+		}
+		autoSlide();
+		
+		function leftRightClick (e) {
+			
+			if (!isMoving) {
+				
+				if (e.target.className=="first_bt") {
+					
+					slideAction(ul.offsetLeft+800);
+					
+					
+				} else{
+					slideAction(ul.offsetLeft-800);
+//					
+				}
+			
+			}	
+		}
+		
+		document.querySelector(".first_bt").onclick=leftRightClick;
+		document.querySelector(".second_bt").onclick=leftRightClick;
+		
+		div.onmouseover=function  () {
+				clearInterval(glableTimer);
+			}
+			div.onmouseout=function  () {
+				autoSlide();
+			}
+
+		function setSpanDotColor (offset) {
+		var spans=document.querySelectorAll("span");
+
+        for (var i=0;i<spans.length;i++) {
+            spans[i].style.backgroundColor="white"
+        }
+        switch (offset){
+            case -800:
+                spans[0].style.backgroundColor="red";
+                break;
+            case -1600:
+                spans[1].style.backgroundColor="red";
+                break;
+            case -2400:
+                spans[2].style.backgroundColor="red";
+                break;
+            default:
+                break;
+        }
+        
+        spans[0].onmouseover=function () {
+					ul.style.left=(-800)+"px";
+					setSpanDotColor(-800);
+				}
+			 	spans[1].onmouseover=function () {
+			 		ul.style.left=(-1600)+"px";
+					setSpanDotColor(-1600);
+			 	}
+				spans[2].onmouseover=function () {
+			 		ul.style.left=(-2400)+"px";		 		
+					setSpanDotColor(-2400)
+			 	}
+        
+    }
+		
+		
+	</script>
+	
+	
+	
+	
+	
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.out_div{
+				width: 800px;
+				height: 500px;
+				position: relative;
+				margin: 50px auto;
+				border: thick solid olivedrab;
+				overflow: hidden;
+			}
+			ul{
+				position: absolute;
+				left: -800px;
+				width: 4000px;
+				height: 500px;
+				
+			}
+			li{
+				list-style-type: none;
+				float:left ;
+			}
+			img{
+				width: 800px;
+				height: 500px;
+			}
+			button{
+				position: absolute;
+				top: 225px;
+				width: 24px;
+				height: 48px;
+				background-image: url(img/arrow.jpg);
+			}
+			.first_bt{
+				
+			}
+			.second_bt{
+				right: 0px;
+				background-position:0px -48px;
+			}
+			.span_div{
+				position: absolute;
+				bottom: 0;
+				left: 350px;
+				width: 100px;
+				height: 30px;
+				/*background: red;*/
+			}
+			span{
+				display: inline-block;
+				margin: 5px 4px;
+				width: 20px;
+				height: 20px;
+				border-radius:50% ;
+				background-color: white;
+			}
+			.span_div>span:first-child{
+				background-color: red;
+			}
+			
+			
+		</style>
+		
+		
+		
+	</head>
+	<body>
+		
+		<div class="out_div">
+			<ul>
+				<li><a href=""><img src="img/3.jpg"/></a></li>
+				<li><a href=""><img src="img/1.jpg"/></a></li>
+				<li><a href=""><img src="img/2.jpg"/></a></li>
+				<li><a href=""><img src="img/3.jpg"/></a></li>
+				<li><a href=""><img src="img/1.jpg"/></a></li>
+			</ul>
+			
+			<button class="first_bt"></button>
+			<button class="second_bt"></button>
+			
+			 <div class="span_div">
+			 	<span></span>
+			 	<span></span>
+			 	<span></span>
+			 </div>
+			
+		</div>
+		
+		<script type="text/javascript">
+			
+			var div=document.querySelector(".out_div");
+			var ul=document.querySelector("ul");
+			var bty=document.querySelector(".first_bt");
+			var btz=document.querySelector(".second_bt")
+			var spans=document.querySelectorAll("span");
+			
+			
+			function showButton (offset) {			
+//				var spans=document.querySelectorAll("span");
+				
+				for (var i=0;i<spans.length;i++) {
+					spans[i].style.backgroundColor="white"
+				}
+				switch (offset){
+					case -800:
+						spans[0].style.backgroundColor="red";
+						break;
+					case -1600:
+						spans[1].style.backgroundColor="red";
+						break;
+					case -2400:
+						spans[2].style.backgroundColor="red";
+					    break;
+					default:
+						break;
+				}
+			}
+				
+			
+			
+			function yiD (offset) {
+				ul.style.left=ul.offsetLeft+offset+"px";
+				if (ul.offsetLeft<=-3200) {
+					ul.style.left=-800+"px";
+				}
+				if (ul.offsetLeft==0) {
+					ul.style.left=-2400+"px";
+				}
+			}
+			
+			btz.onclick=function  () {
+				yiD(-800);
+				
+				showButton(ul.offsetLeft);
+			}
+			bty.onclick=function  () {
+				yiD(800);
+				showButton(ul.offsetLeft);
+			}
+			
+			
+//			for (var i=0;i<spans.length;i++) {
+//				spans[i].onclick=function  () {
+//					
+//					spans[i].index=i;
+//					var offse1=-800*(this.index-ul.offsetLeft/800);
+//					showButton(offse1);
+//				}
+//			}
+			
+		</script>
+		
+		
+	</body>
+</html>
